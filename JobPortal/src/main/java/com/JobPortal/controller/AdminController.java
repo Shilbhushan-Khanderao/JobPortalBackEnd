@@ -65,11 +65,11 @@ public class AdminController {
 	
 	//http://localhost:9009/admin/delete?adminid=1
 	@DeleteMapping(value = "/delete")
-	public HashMap<String, String> delete(@RequestParam("adminid") String job_Id) {
+	public HashMap<String, String> delete(@RequestParam("adminid") String adminid) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
 		
-		int id = Integer.parseInt(job_Id);
+		int id = Integer.parseInt(adminid);
 		
 		if(daoImpl.deleteAdmin(id))
 			hmap.put("msg", "Admin deleted successfully");
