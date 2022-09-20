@@ -29,6 +29,13 @@ public class Application {
 		
 	}
 	
+	public Application(String date, String applicationstatus, Jobseeker jobseeker, Job job) {
+		this.date = date;
+		this.applicationstatus = applicationstatus;
+		this.jobseeker = jobseeker;
+		this.job = job;
+	}
+
 	public int getApplicationid() {
 		return applicationid;
 	}

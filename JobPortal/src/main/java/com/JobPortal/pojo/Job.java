@@ -51,6 +51,19 @@ public class Job {
 		
 	}
 	
+	public Job(String jobTitle, int salary, String location, String jobCategory, String jobDescription,
+			String totalVacancy, String postDate, String postStatus, List<Application> applications) {
+		this.jobTitle = jobTitle;
+		this.salary = salary;
+		this.location = location;
+		this.jobCategory = jobCategory;
+		this.jobDescription = jobDescription;
+		this.totalVacancy = totalVacancy;
+		this.postDate = postDate;
+		this.postStatus = postStatus;
+		this.applications = applications;
+	}
+
 	public int getJobid() {
 		return jobid;
 	}

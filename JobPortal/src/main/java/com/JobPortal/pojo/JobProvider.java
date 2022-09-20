@@ -44,6 +44,18 @@ public class JobProvider {
 
 	}
 	
+	public JobProvider(String username, String password, String fname, String mname, String lname, String companyname,
+			String mobileno, String emailid) {
+		this.username = username;
+		this.password = password;
+		this.fname = fname;
+		this.mname = mname;
+		this.lname = lname;
+		this.companyname = companyname;
+		this.mobileno = mobileno;
+		this.emailid = emailid;
+	}
+
 	public int getJobproviderid() {
 		return jobproviderid;
 	}

@@ -30,6 +30,14 @@ public class Experience {
 	public Experience(){
 		
 	}
+	
+	public Experience(String companyname, String companysector, String jobtitle, String location, int duration) {
+		this.companyname = companyname;
+		this.companysector = companysector;
+		this.jobtitle = jobtitle;
+		this.location = location;
+		this.duration = duration;
+	}
 
 	public int getExpid() {
 		return expid;

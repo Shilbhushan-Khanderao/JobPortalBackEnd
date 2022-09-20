@@ -59,6 +59,22 @@ public class Jobseeker {
 	public Jobseeker() {
 
 	}
+	
+	public Jobseeker(String username, String password, String fname, String mname, String lname, String emailid,
+			String mobilenumber, String dob, int age, String gender, String address, List<Application> applications) {
+		this.username = username;
+		this.password = password;
+		this.fname = fname;
+		this.mname = mname;
+		this.lname = lname;
+		this.emailid = emailid;
+		this.mobilenumber = mobilenumber;
+		this.dob = dob;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+		this.applications = applications;
+	}
 
 	public int getJobseekerid() {
 		return jobseekerid;

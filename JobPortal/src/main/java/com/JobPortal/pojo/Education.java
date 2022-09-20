@@ -46,6 +46,22 @@ public class Education{
 	public Education(){
 		
 	}
+	
+	public Education(String educationtype, float sscpercent, float hscpercent, float diplomapercent,
+			float degreepercent, float masterspercent, String sscyear, String hscyear, String diplomayear,
+			String degreeyear, String mastersyear) {
+		this.educationtype = educationtype;
+		this.sscpercent = sscpercent;
+		this.hscpercent = hscpercent;
+		this.diplomapercent = diplomapercent;
+		this.degreepercent = degreepercent;
+		this.masterspercent = masterspercent;
+		this.sscyear = sscyear;
+		this.hscyear = hscyear;
+		this.diplomayear = diplomayear;
+		this.degreeyear = degreeyear;
+		this.mastersyear = mastersyear;
+	}
 
 	public int getEducationid() {
 		return educationid;
