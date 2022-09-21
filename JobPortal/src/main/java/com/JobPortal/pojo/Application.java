@@ -21,19 +21,13 @@ public class Application {
 	@JoinColumn(name = "jobseekerid",referencedColumnName = "jobseekerid")
 	private Jobseeker jobseeker;
 	
-	@ManyToOne(fetch = FetchType.LAZY,targetEntity = Job.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "jobid",referencedColumnName = "jobid")
-	private Job job;
-	
 	public Application() {
 		
 	}
 	
-	public Application(String date, String applicationstatus, Jobseeker jobseeker, Job job) {
+	public Application(String date, String applicationstatus) {
 		this.date = date;
 		this.applicationstatus = applicationstatus;
-		this.jobseeker = jobseeker;
-		this.job = job;
 	}
 
 	public int getApplicationid() {
@@ -67,18 +61,10 @@ public class Application {
 	public void setJobseeker(Jobseeker jobseeker) {
 		this.jobseeker = jobseeker;
 	}
-	
-	public Job getJob() {
-		return job;
-	}
-
-	public void setJob(Job job) {
-		this.job = job;
-	}
 
 	@Override
 	public String toString() {
-		return  applicationid +" : "+ date + " : "+ applicationstatus + ":" + jobseeker + " : " + job;
+		return  applicationid +" : "+ date + " : "+ applicationstatus;
 	}
 	
 	

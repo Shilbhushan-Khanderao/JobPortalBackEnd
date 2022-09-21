@@ -1,18 +1,14 @@
 package com.JobPortal.pojo;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "job")
+@Table(name = "Job")
 public class Job {
 	
 	@Id
@@ -44,15 +40,12 @@ public class Job {
 	@Column(name = "postStatus")
 	private String postStatus;
 	
-	@OneToMany(mappedBy = "job",targetEntity = Application.class,cascade = CascadeType.ALL)
-	private List<Application> applications;
-	
 	public Job() {
 		
 	}
 	
 	public Job(String jobTitle, int salary, String location, String jobCategory, String jobDescription,
-			String totalVacancy, String postDate, String postStatus, List<Application> applications) {
+			String totalVacancy, String postDate, String postStatus) {
 		this.jobTitle = jobTitle;
 		this.salary = salary;
 		this.location = location;
@@ -61,7 +54,6 @@ public class Job {
 		this.totalVacancy = totalVacancy;
 		this.postDate = postDate;
 		this.postStatus = postStatus;
-		this.applications = applications;
 	}
 
 	public int getJobid() {
@@ -119,19 +111,12 @@ public class Job {
 	}
 	public void setPostStatus(String postStatus) {
 		this.postStatus = postStatus;
-	}	
-	public List<Application> getApplications() {
-		return applications;
-	}
-
-	public void setApplications(List<Application> applications) {
-		this.applications = applications;
 	}
 
 	@Override
 	public String toString() {
 		return jobid + " : " + jobTitle + " : " + salary + " : " +
 				location + " : " + jobCategory + " : " + jobDescription + " : " +
-				totalVacancy + " : " + postDate + " : " + postStatus + " : " + applications;
+				totalVacancy + " : " + postDate + " : " + postStatus;
 	}
 }

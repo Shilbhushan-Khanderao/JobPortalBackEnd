@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.JobPortal.dao.AdminDao;
 import com.JobPortal.pojo.Admin;
+import com.JobPortal.pojo.Application;
 import com.JobPortal.pojo.JobProvider;
 import com.JobPortal.pojo.Jobseeker;
 import com.JobPortal.repository.AdminRepository;
+import com.JobPortal.repository.ApplicationRepository;
 import com.JobPortal.repository.JobProviderRepository;
 import com.JobPortal.repository.JobseekerRepository;
 
@@ -27,6 +29,9 @@ public class AdminDaoImpl implements AdminDao{
 	@Autowired
 	private JobseekerRepository repositoryJS;
 	
+	@Autowired
+	private ApplicationRepository appRepository;
+	
 	@Override
 	public boolean checkCredentials(Admin admin) {
 		try {
@@ -34,7 +39,7 @@ public class AdminDaoImpl implements AdminDao{
 			
 			if (adm != null) {
 				
-				if (adm.getPassword().equals(admin.getPassword())) {
+				if (adm.getUsername().equals(admin.getUsername()) && adm.getPassword().equals(admin.getPassword())) {
 					return true;
 				}
 				else {
@@ -103,6 +108,21 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
+	public List<Admin> getAllAdmins() {
+		
+		List<Admin> lst = new ArrayList<>();
+		
+		try {
+			repository.findAll().forEach(lst::add);
+			return lst;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
 	public List<JobProvider> getJobProviderList() {
 		
 		List<JobProvider> lst = new ArrayList<>();
@@ -121,6 +141,7 @@ public class AdminDaoImpl implements AdminDao{
 	public List<Jobseeker> getJobSeekerList() {
 		
 		List<Jobseeker> lst = new ArrayList<>();
+		List<Application> applist = new ArrayList<>();
 		
 		try {
 			repositoryJS.findAll().forEach(lst::add);
@@ -130,19 +151,6 @@ public class AdminDaoImpl implements AdminDao{
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-
-	@Override
-	public boolean validateJobProvider(JobProvider jp) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean validateJobSeeker(Jobseeker js) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

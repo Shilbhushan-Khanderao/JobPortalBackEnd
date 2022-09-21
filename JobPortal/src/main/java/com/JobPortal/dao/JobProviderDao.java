@@ -19,5 +19,5 @@ public interface JobProviderDao {
 	public boolean deleteJobPost(int jobid);
 	
 	//Job Method
-	Job viewJobPost(Job job);
+	Job viewJobPost(int jobid);
 }

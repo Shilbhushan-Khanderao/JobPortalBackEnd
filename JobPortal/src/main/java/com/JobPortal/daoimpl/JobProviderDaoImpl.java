@@ -27,7 +27,7 @@ public class JobProviderDaoImpl implements JobProviderDao {
 
 			if (jProvider != null) {
 				
-				if (jProvider.getPassword().equals(jp.getPassword()))
+				if (jProvider.getUsername().equals(jp.getUsername()) && jProvider.getPassword().equals(jp.getPassword()))
 					return true;
 				else
 					return false;
@@ -143,9 +143,9 @@ public class JobProviderDaoImpl implements JobProviderDao {
 	}
 
 	@Override
-	public Job viewJobPost(Job job) {
+	public Job viewJobPost(int  jobid) {
 		try {
-			Optional<Job> opt = jobrepository.findById(job.getJobid()); 
+			Optional<Job> opt = jobrepository.findById(jobid); 
 			
 			if(opt.isPresent()) {
 				Job pr = opt.get();

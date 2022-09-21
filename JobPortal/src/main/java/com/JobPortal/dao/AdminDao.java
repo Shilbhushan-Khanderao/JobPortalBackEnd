@@ -16,10 +16,9 @@ public interface AdminDao {
 	boolean deleteAdmin(int adminid);
 	
 	//admin methods
+	List<Admin> getAllAdmins();
 	List<JobProvider> getJobProviderList();
 	List<Jobseeker> getJobSeekerList();
-	boolean validateJobProvider(JobProvider jp);
-	boolean validateJobSeeker(Jobseeker js);
 	boolean deleteJobProvider(JobProvider jp);
 	boolean deleteJobSeeker(Jobseeker js);
 }

@@ -2,13 +2,18 @@ package com.JobPortal.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.JobPortal.pojo.Application;
 
-public interface ApplicationRepository extends CrudRepository<Application, Integer>{
+@Repository
+public interface ApplicationRepository extends JpaRepository<Application, Integer>{
 	
-	@Query("From Application a where a.jobseeker.jobseekerid = ?1")
+//	@Query("From Application a where a.jobseeker.jobseekerid = ?1")
+//	List<Application> getApplications(int jobseekerid);
+	
+	@Query(value = "Select * from application Where jobseekerid = ?1",nativeQuery = true)
 	List<Application> getApplications(int jobseekerid);
 }

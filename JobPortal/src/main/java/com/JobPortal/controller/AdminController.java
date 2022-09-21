@@ -79,16 +79,24 @@ public class AdminController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/admin/getallemployer
-	@GetMapping(value = "/getallemployer")
+	//http://localhost:9009/admin/getalladmin
+	@GetMapping(value = "/getalladmin")
+	public List<Admin> getAllAdmin() {
+	
+		List<Admin> lst = daoImpl.getAllAdmins();
+		return lst;
+	}
+	
+	//http://localhost:9009/admin/getalljobprovider
+	@GetMapping(value = "/getalljobprovider")
 	public List<JobProvider> getAllJobProvider() {
 	
 		List<JobProvider> lst = daoImpl.getJobProviderList();
 		return lst;
 	}
 	
-	//http://localhost:9009/admin/getallcandidate
-	@GetMapping(value = "/getallcandidate")
+	//http://localhost:9009/admin/getalljobseeker
+	@GetMapping(value = "/getalljobseeker")
 	public List<Jobseeker> getAllCandidate(){
 		List<Jobseeker> lst = daoImpl.getJobSeekerList();
 		return lst;

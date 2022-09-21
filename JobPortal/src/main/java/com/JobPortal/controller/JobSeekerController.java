@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,8 +42,8 @@ public class JobSeekerController {
 		return hmap;
 	}
 		
-	//http://localhost:9009/jobseeker/addJobseeker
-	@PostMapping(value = "/addJobseeker")
+	//http://localhost:9009/jobseeker/addjobseeker
+	@PostMapping(value = "/addjobseeker")
 	public HashMap<String, String> addJobCandidate(@RequestBody Jobseeker js) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
@@ -116,17 +118,17 @@ public class JobSeekerController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobseeker/getappliedjobs
-	@PostMapping(value = "/getappliedjobs")
-	public List<Application> getAppliedJobs(@RequestBody Jobseeker js) {
+	//http://localhost:9009/jobseeker/getappliedjobs/2
+	@GetMapping(value = "/getappliedjobs/{id}")
+	public List<Application> getAppliedJobs(@PathVariable("id") int id) {
 		
-		List<Application> lst = daoImpl.getAppliedJobs(js);
+		List<Application> lst = daoImpl.getAppliedJobs(id);
 		return lst;
 	}
 	
-	//http://localhost:9009/jobseeker/addEducation
-	@PostMapping(value = "/addEducation")
-	public HashMap<String, String> addJ(@RequestBody Education edu) {
+	//http://localhost:9009/jobseeker/addeducation
+	@PostMapping(value = "/addeducation")
+	public HashMap<String, String> addEducation(@RequestBody Education edu) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
 		
@@ -139,8 +141,8 @@ public class JobSeekerController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobseeker/updateEducation
-	@PutMapping(value = "/updateEducation")
+	//http://localhost:9009/jobseeker/updateeducation
+	@PutMapping(value = "/updateeducation")
 	public HashMap<String, String> updateEducation(@RequestBody Education education)
 	{
 		HashMap<String, String> hmap = new HashMap<>();
@@ -153,8 +155,8 @@ public class JobSeekerController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobseeker/deleteEducation?jobseekerid=1
-	@DeleteMapping(value = "/deleteEducation")
+	//http://localhost:9009/jobseeker/deleteeducation?jobseekerid=1
+	@DeleteMapping(value = "/deleteeducation")
 	public HashMap<String, String> deleteEducation(@RequestParam("educationid") String eduid) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
@@ -169,8 +171,8 @@ public class JobSeekerController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobseeker/addExp
-	@PostMapping(value = "/addExp")
+	//http://localhost:9009/jobseeker/addexp
+	@PostMapping(value = "/addexp")
 	public HashMap<String, String> addExperience(@RequestBody Experience experience) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
@@ -184,8 +186,8 @@ public class JobSeekerController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobseeker/updateExp
-	@PutMapping(value = "/updateExp")
+	//http://localhost:9009/jobseeker/updateexp
+	@PutMapping(value = "/updateexp")
 	public HashMap<String, String> updateExperience(@RequestBody Experience experience)
 	{
 		HashMap<String, String> hmap = new HashMap<>();
@@ -198,8 +200,8 @@ public class JobSeekerController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobseeker/deleteExp?jobseekerid=1
-	@DeleteMapping(value = "/deleteExp")
+	//http://localhost:9009/jobseeker/deleteexp?jobseekerid=1
+	@DeleteMapping(value = "/deleteexp")
 	public HashMap<String, String> deleteExperience(@RequestParam("expid") String expid) {
 		
 		HashMap<String, String> hmap = new HashMap<>();

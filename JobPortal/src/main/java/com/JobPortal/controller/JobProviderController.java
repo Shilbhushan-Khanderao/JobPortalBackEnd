@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,8 +42,8 @@ public class JobProviderController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobprovider/addJobProvider
-	@PostMapping(value = "/addJobProvider")
+	//http://localhost:9009/jobprovider/addjobprovider
+	@PostMapping(value = "/addjobprovider")
 	public HashMap<String, String> addJobCandidate(@RequestBody JobProvider jp) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
@@ -85,8 +87,8 @@ public class JobProviderController {
 			return hmap;
 		}
 	
-	//http://localhost:9009/jobprovider/addJobPost
-	@PostMapping(value = "/addJobPost")
+	//http://localhost:9009/jobprovider/addjobpost
+	@PostMapping(value = "/addjobpost")
 	public HashMap<String, String> addJobPost(@RequestBody Job job) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
@@ -100,8 +102,8 @@ public class JobProviderController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobprovider/editJobPost
-	@PutMapping(value = "/editJobPost")
+	//http://localhost:9009/jobprovider/editjobpost
+	@PutMapping(value = "/editjobpost")
 	public HashMap<String, String> update(@RequestBody Job job)
 	{
 		HashMap<String, String> hmap = new HashMap<>();
@@ -114,8 +116,8 @@ public class JobProviderController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobprovider/deleteJobPost?jobid=1
-	@DeleteMapping(value = "/deleteJobPost")
+	//http://localhost:9009/jobprovider/deletejobpost?jobid=1
+	@DeleteMapping(value = "/deletejobpost")
 	public HashMap<String, String> delete(@RequestParam("jobid") String jobid) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
@@ -130,11 +132,11 @@ public class JobProviderController {
 		return hmap;
 	}
 	
-	//http://localhost:9009/jobprovider/view
-	@PostMapping(value = "/view")
-	public Job viewJob(@RequestBody Job job){
-		Job j = daoImpl.viewJobPost(job);
+	//http://localhost:9009/jobprovider/view/1
+	@GetMapping(value = "/view/{jobid}")
+	public Job viewJob(@PathVariable("jobid") int jobid){
+		
+		Job j = daoImpl.viewJobPost(jobid);
 		return j;
 	}
-	
 }

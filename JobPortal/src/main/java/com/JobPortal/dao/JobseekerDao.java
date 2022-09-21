@@ -22,7 +22,7 @@ public interface JobseekerDao {
 	boolean applyForJob(Application appl);
 	boolean deleteAppl(int appid);
 	Jobseeker viewProfile(Jobseeker jobseeker);
-	List<Application> getAppliedJobs(Jobseeker jobseeker);
+	List<Application> getAppliedJobs(int jsid);
 	
 	//Education methods
 	boolean addEducation(Education edu);

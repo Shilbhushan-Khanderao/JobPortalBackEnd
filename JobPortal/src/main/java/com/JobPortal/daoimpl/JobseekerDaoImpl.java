@@ -39,7 +39,7 @@ public class JobseekerDaoImpl implements JobseekerDao {
 
 			if (js != null) {
 
-				if (js.getPassword().equals(jobseeker.getPassword())) {
+				if (js.getUsername().equals(jobseeker.getUsername()) && js.getPassword().equals(jobseeker.getPassword())) {
 					return true;
 				} else {
 					return false;
@@ -161,11 +161,11 @@ public class JobseekerDaoImpl implements JobseekerDao {
 	}
 
 	@Override
-	public List<Application> getAppliedJobs(Jobseeker js) {
+	public List<Application> getAppliedJobs(int jsid) {
 		List<Application> lst = new ArrayList<>();
 		
 		try {
-			lst = appRepository.getApplications(js.getJobseekerid());
+			lst = appRepository.getApplications(jsid);
 			return lst;
 			
 		} catch (Exception e) {
