@@ -14,6 +14,7 @@ public interface AdminDao {
 	boolean AddAdmin(Admin admin);
 	boolean editAdmin(Admin admin);
 	boolean deleteAdmin(int adminid);
+	Admin viewProfile(int adminid);
 	
 	//admin methods
 	List<Admin> getAllAdmins();

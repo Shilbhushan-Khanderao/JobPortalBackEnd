@@ -33,22 +33,20 @@ public class JobseekerDaoImpl implements JobseekerDao {
 	private ExperienceRepository expRepository;
 
 	@Override
-	public boolean checkCredentials(Jobseeker jobseeker) {
+	public Jobseeker checkCredentials(Jobseeker jobseeker) {
 		try {
 			Jobseeker js = repository.login(jobseeker.getUsername(), jobseeker.getPassword());
 
 			if (js != null) {
 
 				if (js.getUsername().equals(jobseeker.getUsername()) && js.getPassword().equals(jobseeker.getPassword())) {
-					return true;
-				} else {
-					return false;
+					return js;
 				}
 			}
-			return false;
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 
@@ -144,9 +142,9 @@ public class JobseekerDaoImpl implements JobseekerDao {
 	}
 
 	@Override
-	public Jobseeker viewProfile(Jobseeker jobseeker) {
+	public Jobseeker viewProfile(int jobseekerid) {
 		try {
-			Optional<Jobseeker> opt = repository.findById(jobseeker.getJobseekerid()); 
+			Optional<Jobseeker> opt = repository.findById(jobseekerid); 
 			
 			if(opt.isPresent()) {
 				Jobseeker pr = opt.get();

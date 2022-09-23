@@ -21,21 +21,19 @@ public class JobProviderDaoImpl implements JobProviderDao {
 	private JobRepository jobrepository;
 	
 	@Override
-	public boolean checkCredentials(JobProvider jp) {
+	public JobProvider checkCredentials(JobProvider jp) {
 		try {
 			JobProvider jProvider = repository.login(jp.getUsername(),jp.getPassword());
 
 			if (jProvider != null) {
 				
 				if (jProvider.getUsername().equals(jp.getUsername()) && jProvider.getPassword().equals(jp.getPassword()))
-					return true;
-				else
-					return false;
+					return jProvider;
 			}
-			return false;
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 
@@ -149,6 +147,23 @@ public class JobProviderDaoImpl implements JobProviderDao {
 			
 			if(opt.isPresent()) {
 				Job pr = opt.get();
+				return pr;
+			}
+			else
+				return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public JobProvider viewProfile(int jpid) {
+		try {
+			Optional<JobProvider> opt = repository.findById(jpid); 
+			
+			if(opt.isPresent()) {
+				JobProvider pr = opt.get();
 				return pr;
 			}
 			else

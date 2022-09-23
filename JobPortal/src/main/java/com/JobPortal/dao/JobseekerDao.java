@@ -11,7 +11,7 @@ import com.JobPortal.pojo.Jobseeker;
 
 public interface JobseekerDao {
 	
-	boolean checkCredentials(Jobseeker jobseeker);
+	Jobseeker checkCredentials(Jobseeker jobseeker);
 	
 	//CRUD methods
 	boolean AddJobseeker(Jobseeker jobseeker);
@@ -21,7 +21,7 @@ public interface JobseekerDao {
 	//Jobseeker Methods
 	boolean applyForJob(Application appl);
 	boolean deleteAppl(int appid);
-	Jobseeker viewProfile(Jobseeker jobseeker);
+	Jobseeker viewProfile(int jobseekerid);
 	List<Application> getAppliedJobs(int jsid);
 	
 	//Education methods

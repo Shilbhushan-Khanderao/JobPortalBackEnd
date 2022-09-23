@@ -6,7 +6,7 @@ import com.JobPortal.pojo.JobProvider;
 public interface JobProviderDao {
 
 	//Login Method
-	public boolean checkCredentials(JobProvider jp);
+	public JobProvider checkCredentials(JobProvider jp);
 	
 	//CRUD methods
 	public boolean SignUp(JobProvider jp);
@@ -17,7 +17,7 @@ public interface JobProviderDao {
 	public boolean addJobPost(Job job);
 	public boolean editJobPost(Job job);
 	public boolean deleteJobPost(int jobid);
-	
+	JobProvider viewProfile(int jpid);
 	//Job Method
 	Job viewJobPost(int jobid);
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,7 +67,6 @@ public class AdminController {
 	@PutMapping(value = "/update")
 	public ResponseEntity<?> update(@RequestBody Admin admin)
 	{
-		
 		if(daoImpl.editAdmin(admin)) 
 			return Response.success(admin);
 		else
@@ -119,10 +119,10 @@ public class AdminController {
 		HashMap<String, String> hmap = new HashMap<>();
 		
 		if (daoImpl.deleteJobProvider(jp)) {
-			hmap.put("msg", "Employer Deletion Successful");
+			hmap.put("msg", "deleted");
 		}
 		else {
-			hmap.put("msg", "Employer Deletion Successful");
+			hmap.put("msg", "failed");
 		}
 		return ResponseEntity.ok(hmap);
 	}
@@ -134,11 +134,19 @@ public class AdminController {
 			HashMap<String, String> hmap = new HashMap<>();
 			
 			if (daoImpl.deleteJobSeeker(js)) {
-				hmap.put("msg", "Cadidate Deletion Successful");
+				hmap.put("msg", "deleted");
 			}
 			else {
-				hmap.put("msg", "Cadidate Deletion Successful");
+				hmap.put("msg", "failed");
 			}
 			return ResponseEntity.ok(hmap);
+		}
+		
+		//http://localhost:9009/admin/viewjobprovider/1
+		@GetMapping(value = "/viewprofile/{adminid}")
+		public Admin viewAdmin(@PathVariable("adminid") int adminid){
+			
+			Admin j = daoImpl.viewProfile(adminid);
+			return j;
 		}
 }

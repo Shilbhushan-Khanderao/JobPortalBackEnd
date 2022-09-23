@@ -1,10 +1,14 @@
 package com.JobPortal.pojo;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +43,9 @@ public class Job {
 	
 	@Column(name = "postStatus")
 	private String postStatus;
+	
+	@OneToMany(mappedBy = "job",targetEntity = Application.class,cascade = CascadeType.ALL)
+	private List<Application> applications;
 	
 	public Job() {
 		

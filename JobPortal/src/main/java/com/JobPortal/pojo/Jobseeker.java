@@ -61,7 +61,7 @@ public class Jobseeker {
 	}
 	
 	public Jobseeker(String username, String password, String fname, String mname, String lname, String emailid,
-			String mobilenumber, String dob, int age, String gender, String address, List<Application> applications) {
+			String mobilenumber, String dob, int age, String gender, String address) {
 		this.username = username;
 		this.password = password;
 		this.fname = fname;
@@ -73,7 +73,6 @@ public class Jobseeker {
 		this.age = age;
 		this.gender = gender;
 		this.address = address;
-		this.applications = applications;
 	}
 
 	public int getJobseekerid() {
@@ -172,19 +171,10 @@ public class Jobseeker {
 		this.address = address;
 	}
 
-	public List<Application> getApplications() {
-		return applications;
-	}
-
-	public void setApplications(List<Application> applications) {
-		this.applications = applications;
-	}
-
 	@Override
 	public String toString() {
 		return +jobseekerid + " : " + username + " : " + password + " : " + fname + " : " + mname + " : " + lname
-				+ " : " + emailid + " : " + mobilenumber + " : " + dob + " : " + age + " : " + gender + " : " + address
-				+ " : " + applications;
+				+ " : " + emailid + " : " + mobilenumber + " : " + dob + " : " + age + " : " + gender + " : " + address;
 	}
 
 }

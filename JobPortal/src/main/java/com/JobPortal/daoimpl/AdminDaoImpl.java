@@ -37,9 +37,6 @@ public class AdminDaoImpl implements AdminDao{
 				if (adm.getUsername().equals(admin.getUsername()) && adm.getPassword().equals(admin.getPassword())) {
 					return adm;
 				}
-				else {
-					return null;
-				}
 			}
 			return null;
 		} catch (Exception e) {
@@ -182,6 +179,22 @@ public class AdminDaoImpl implements AdminDao{
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public Admin viewProfile(int adminid) {
+		try {
+			Optional<Admin> opt = repository.findById(adminid); 
+			
+			if(opt.isPresent()) {
+				Admin pr = opt.get();
+				return pr;
+			}
+			else
+				return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

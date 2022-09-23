@@ -1,20 +1,14 @@
 package com.JobPortal.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.JobPortal.dao.JobProviderDao;
+import com.JobPortal.daoimpl.Response;
 import com.JobPortal.pojo.Job;
 import com.JobPortal.pojo.JobProvider;
 
@@ -29,107 +23,100 @@ public class JobProviderController {
 	
 	//http://localhost:9009/jobprovider/login
 	@PostMapping(value = "/login")
-	public HashMap<String, String> checkUser(@RequestBody JobProvider jp) {
+	public ResponseEntity<?> checkUser(@RequestBody JobProvider jp) {
 		
-		HashMap<String,String> hmap = new HashMap<>();
+		JobProvider jProvider = daoImpl.checkCredentials(jp);
 		
-		if(daoImpl.checkCredentials(jp)) {
-			hmap.put("msg","Login Success");
+		if(jProvider == null) {
+			return Response.error("User not found");
 		}
-		else {
-			hmap.put("msg", "Login Failed");
-		}
-		return hmap;
+		System.out.println(jProvider);
+		return Response.success(jProvider);
 	}
 	
 	//http://localhost:9009/jobprovider/addjobprovider
 	@PostMapping(value = "/addjobprovider")
-	public HashMap<String, String> addJobCandidate(@RequestBody JobProvider jp) {
-		
-		HashMap<String, String> hmap = new HashMap<>();
+	public ResponseEntity<?> addJobCandidate(@RequestBody JobProvider jp) {
 		
 		if (daoImpl.SignUp(jp)) {
-			hmap.put("msg", "Register Success");
+			return Response.success(jp);
 		}
 		else {
-			hmap.put("msg", "Register Failed");
+			return Response.error("User addition failed");
 		}
-		return hmap;
 	}
 	
 		//http://localhost:9009/jobprovider/update
 		@PutMapping(value = "/update")
-		public HashMap<String, String> update(@RequestBody JobProvider jp)
-		{
-			HashMap<String, String> hmap = new HashMap<>();
-			
+		public ResponseEntity<?> update(@RequestBody JobProvider jp)
+		{			
 			if(daoImpl.editJobProvider(jp)) 
-				hmap.put("msg", "Updated successfully");
+				return Response.success(jp);
 			else
-				hmap.put("msg", "Updation failed");
-			
-			return hmap;
+				return Response.error("Updation Failed");
 		}
 		
 		//http://localhost:9009/jobprovider/delete?adminid=1
 		@DeleteMapping(value = "/delete")
-		public HashMap<String, String> deleteJobProvider(@RequestParam("jobproviderid") String jpid) {
+		public ResponseEntity<Map<String, String>> deleteJobProvider(@RequestParam("jobproviderid") String jpid) {
 			
 			HashMap<String, String> hmap = new HashMap<>();
 			
 			int id = Integer.parseInt(jpid);
 			
 			if(daoImpl.deleteJobProvider(id))
-				hmap.put("msg", "Deleted successfully");
+				hmap.put("msg", "deleted");
 			else
-				hmap.put("msg", "Deletion failed");
+				hmap.put("msg", "failed");
 			
-			return hmap;
+			return ResponseEntity.ok(hmap);
 		}
 	
 	//http://localhost:9009/jobprovider/addjobpost
 	@PostMapping(value = "/addjobpost")
-	public HashMap<String, String> addJobPost(@RequestBody Job job) {
-		
-		HashMap<String, String> hmap = new HashMap<>();
+	public ResponseEntity<?> addJobPost(@RequestBody Job job) {
 		
 		if (daoImpl.addJobPost(job)) {
-			hmap.put("msg", "Job Added Successfully");
+			return Response.success(job);
 		}
 		else {
-			hmap.put("msg", "Job Addition Failed");
+			return Response.error("Job Addition Failed");
 		}
-		return hmap;
 	}
 	
 	//http://localhost:9009/jobprovider/editjobpost
 	@PutMapping(value = "/editjobpost")
-	public HashMap<String, String> update(@RequestBody Job job)
+	public ResponseEntity<?> update(@RequestBody Job job)
 	{
-		HashMap<String, String> hmap = new HashMap<>();
 		
 		if(daoImpl.editJobPost(job)) 
-			hmap.put("msg", "Updated successfully");
+			return Response.success(job);
 		else
-			hmap.put("msg", "Updation failed");
-		
-		return hmap;
+			return Response.error("Update Failed");
 	}
 	
 	//http://localhost:9009/jobprovider/deletejobpost?jobid=1
 	@DeleteMapping(value = "/deletejobpost")
-	public HashMap<String, String> delete(@RequestParam("jobid") String jobid) {
+	public ResponseEntity<Map<String, String>> delete(@RequestParam("jobid") String jobid) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
 		
 		int id = Integer.parseInt(jobid);
 		
 		if(daoImpl.deleteJobPost(id))
-			hmap.put("msg", "Job deleted successfully");
+			hmap.put("msg", "deleted");
 		else
-			hmap.put("msg", "Job deletion failed");
+			hmap.put("msg", "failed");
 		
-		return hmap;
+		return ResponseEntity.ok(hmap);
+	}
+	
+	//http://localhost:9009/jobprovider/viewprofile/1
+	@GetMapping(value = "/viewprofile/{jobproviderid}")
+	public JobProvider viewJobProvider(@PathVariable("jobproviderid") int jobproviderid){
+		
+		JobProvider j = daoImpl.viewProfile(jobproviderid);
+		return j;
 	}
 	
 	//http://localhost:9009/jobprovider/view/1
