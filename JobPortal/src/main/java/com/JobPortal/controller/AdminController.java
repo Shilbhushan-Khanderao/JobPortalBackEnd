@@ -2,11 +2,22 @@ package com.JobPortal.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.JobPortal.dao.AdminDao;
+import com.JobPortal.daoimpl.Response;
 import com.JobPortal.pojo.Admin;
 import com.JobPortal.pojo.JobProvider;
 import com.JobPortal.pojo.Jobseeker;
@@ -21,62 +32,61 @@ public class AdminController {
 	
 	//http://localhost:9009/admin/login
 	@PostMapping(value = "/login")
-	public HashMap<String, String> checkUser(@RequestBody Admin admin) {
+	public ResponseEntity<?> checkUser(@RequestBody Admin admin) {
 		
-		HashMap<String,String> hmap = new HashMap<>();
+		Admin a = daoImpl.checkCredentials(admin);
 		
-		if(daoImpl.checkCredentials(admin)) {
-			hmap.put("msg","Login Success");
+		if (a == null) {
+			return Response.error("User not Found");
 		}
-		else {
-			hmap.put("msg", "Login Failed");
-		}
-		return hmap;
+		System.out.println(a);
+		return Response.success(a);
+		
+//		if (a != null) {
+//			System.out.println(a);
+//			return ResponseEntity.ok(a);
+//		}
+//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
 	}
 	
 	//http://localhost:9009/admin/addAdmin
 	@PostMapping(value = "/addAdmin")
-	public HashMap<String, String> addAdmin(@RequestBody Admin admin) {
-		
-		HashMap<String, String> hmap = new HashMap<>();
-		
+	public ResponseEntity<?> addAdmin(@RequestBody Admin admin) {
+
 		if (daoImpl.AddAdmin(admin)) {
-			hmap.put("msg", "Register Success");
+			return Response.success(admin);
 		}
 		else {
-			hmap.put("msg", "Register Failed");
+			return Response.error("User Addition Failed");
 		}
-		return hmap;
 	}
 	
 	//http://localhost:9009/admin/update
 	@PutMapping(value = "/update")
-	public HashMap<String, String> update(@RequestBody Admin admin)
+	public ResponseEntity<?> update(@RequestBody Admin admin)
 	{
-		HashMap<String, String> hmap = new HashMap<>();
 		
 		if(daoImpl.editAdmin(admin)) 
-			hmap.put("msg", "Admin updated successfully");
+			return Response.success(admin);
 		else
-			hmap.put("msg", "Admin updation failed");
-		
-		return hmap;
+			return Response.error("Updation Failed");
 	}
 	
 	//http://localhost:9009/admin/delete?adminid=1
 	@DeleteMapping(value = "/delete")
-	public HashMap<String, String> delete(@RequestParam("adminid") String adminid) {
+	public ResponseEntity<Map<String, String>> delete(@RequestParam("adminid") String adminid) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
 		
 		int id = Integer.parseInt(adminid);
 		
 		if(daoImpl.deleteAdmin(id))
-			hmap.put("msg", "Admin deleted successfully");
+			hmap.put("msg", "deleted");
 		else
-			hmap.put("msg", "Admin deletion failed");
+			hmap.put("msg", "failed");
 		
-		return hmap;
+		return ResponseEntity.ok(hmap);
 	}
 	
 	//http://localhost:9009/admin/getalladmin
@@ -104,7 +114,7 @@ public class AdminController {
 	
 	//http://localhost:9009/admin/deletejp?jobProviderid=2
 	@DeleteMapping(value = "/deletejp")
-	public HashMap<String, String> deleteJobProvider(@RequestBody JobProvider jp) {
+	public ResponseEntity<Map<String, String>> deleteJobProvider(@RequestBody JobProvider jp) {
 		
 		HashMap<String, String> hmap = new HashMap<>();
 		
@@ -114,12 +124,12 @@ public class AdminController {
 		else {
 			hmap.put("msg", "Employer Deletion Successful");
 		}
-		return hmap;
+		return ResponseEntity.ok(hmap);
 	}
 	
 		//http://localhost:9009/admin/deletejs?jobSeekerid=3
 		@DeleteMapping(value = "/deletejs")
-		public HashMap<String, String> deleteJobSeeker(@RequestBody Jobseeker js) {
+		public ResponseEntity<Map<String, String>> deleteJobSeeker(@RequestBody Jobseeker js) {
 			
 			HashMap<String, String> hmap = new HashMap<>();
 			
@@ -129,6 +139,6 @@ public class AdminController {
 			else {
 				hmap.put("msg", "Cadidate Deletion Successful");
 			}
-			return hmap;
+			return ResponseEntity.ok(hmap);
 		}
 }

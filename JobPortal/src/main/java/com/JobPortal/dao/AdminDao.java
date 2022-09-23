@@ -8,7 +8,7 @@ import com.JobPortal.pojo.Jobseeker;
 
 public interface AdminDao {
 
-	boolean checkCredentials(Admin admin);
+	Admin checkCredentials(Admin admin);
 	
 	//CRUD Operations
 	boolean AddAdmin(Admin admin);

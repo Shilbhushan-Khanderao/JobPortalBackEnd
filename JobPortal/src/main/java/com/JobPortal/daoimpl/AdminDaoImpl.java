@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.JobPortal.dao.AdminDao;
 import com.JobPortal.pojo.Admin;
-import com.JobPortal.pojo.Application;
 import com.JobPortal.pojo.JobProvider;
 import com.JobPortal.pojo.Jobseeker;
 import com.JobPortal.repository.AdminRepository;
-import com.JobPortal.repository.ApplicationRepository;
 import com.JobPortal.repository.JobProviderRepository;
 import com.JobPortal.repository.JobseekerRepository;
 
@@ -29,27 +27,24 @@ public class AdminDaoImpl implements AdminDao{
 	@Autowired
 	private JobseekerRepository repositoryJS;
 	
-	@Autowired
-	private ApplicationRepository appRepository;
-	
 	@Override
-	public boolean checkCredentials(Admin admin) {
+	public Admin checkCredentials(Admin admin) {
 		try {
 			Admin adm = repository.login(admin.getUsername(),admin.getPassword());
 			
 			if (adm != null) {
 				
 				if (adm.getUsername().equals(admin.getUsername()) && adm.getPassword().equals(admin.getPassword())) {
-					return true;
+					return adm;
 				}
 				else {
-					return false;
+					return null;
 				}
 			}
-			return false;
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 	
@@ -141,7 +136,6 @@ public class AdminDaoImpl implements AdminDao{
 	public List<Jobseeker> getJobSeekerList() {
 		
 		List<Jobseeker> lst = new ArrayList<>();
-		List<Application> applist = new ArrayList<>();
 		
 		try {
 			repositoryJS.findAll().forEach(lst::add);
