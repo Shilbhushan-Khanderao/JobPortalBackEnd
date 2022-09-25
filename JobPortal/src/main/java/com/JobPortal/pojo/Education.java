@@ -43,7 +43,7 @@ public class Education{
 	@Column(name = "mastersyear")
 	private String mastersyear;
 	
-	@OneToMany(fetch = FetchType.LAZY,targetEntity = Jobseeker.class,cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+	@ManyToOne(fetch = FetchType.LAZY,targetEntity = Jobseeker.class,cascade = {CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name = "jobseekerid",referencedColumnName = "jobseekerid",unique = true)
 	private Jobseeker jobseeker;
 
