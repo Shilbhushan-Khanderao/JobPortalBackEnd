@@ -29,10 +29,12 @@ public interface JobseekerDao {
 	boolean editEducation(Education education);
 	boolean deleteEducation(int educationid);
 	List<Education> getEducationList();
+	List<Education> getEducation(int jobseekerid);
 	
 	//Experience methods
 	boolean AddExperience(Experience experience);
 	boolean editExperience(Experience experience);
 	boolean deleteExperience(int Experienceid);
 	List<Experience> getExperienceList();
+	List<Experience> getExperiences(int jobseekerid);
 }

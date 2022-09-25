@@ -14,6 +14,6 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 //	@Query("From Application a where a.jobseeker.jobseekerid = ?1")
 //	List<Application> getApplications(int jobseekerid);
 	
-	@Query(value = "Select * from application Where jobseekerid = ?1",nativeQuery = true)
+	@Query(value = "Select * from application a Where a.jobseekerid = ?1",nativeQuery = true)
 	List<Application> getApplications(int jobseekerid);
 }

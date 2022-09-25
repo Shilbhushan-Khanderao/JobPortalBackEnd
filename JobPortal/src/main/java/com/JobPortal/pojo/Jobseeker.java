@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -55,6 +56,12 @@ public class Jobseeker {
 
 	@OneToMany(mappedBy = "jobseeker",targetEntity = Application.class,cascade = CascadeType.ALL)
 	private List<Application> applications;
+	
+	@OneToMany(mappedBy = "jobseeker",targetEntity = Education.class,cascade = CascadeType.ALL)
+	private List<Education> educations;
+	
+	@OneToMany(mappedBy = "jobseeker",targetEntity = Experience.class,cascade = CascadeType.ALL)
+	private List<Experience> experiences;
 	
 	public Jobseeker() {
 
@@ -169,6 +176,30 @@ public class Jobseeker {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
+	}
+	
+	public List<Education> getEducations() {
+		return educations;
+	}
+
+	public void setEducations(List<Education> educations) {
+		this.educations = educations;
+	}
+
+	public List<Experience> getExperiences() {
+		return experiences;
+	}
+
+	public void setExperiences(List<Experience> experiences) {
+		this.experiences = experiences;
 	}
 
 	@Override

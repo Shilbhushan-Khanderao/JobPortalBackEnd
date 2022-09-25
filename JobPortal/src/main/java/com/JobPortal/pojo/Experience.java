@@ -27,6 +27,10 @@ public class Experience {
 	@Column(name = "duration")
 	private int duration;
 	
+	@ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.REFRESH},targetEntity = Jobseeker.class)
+	@JoinColumn(name = "jobseekerid",referencedColumnName = "jobseekerid")
+	private Jobseeker jobseeker;
+
 	public Experience(){
 		
 	}
@@ -85,5 +89,19 @@ public class Experience {
 
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+	
+//	public Jobseeker getJobseeker() {
+//		return jobseeker;
+//	}
+//
+//	public void setJobseeker(Jobseeker jobseeker) {
+//		this.jobseeker = jobseeker;
+//	}
+
+	@Override
+	public String toString() {
+		return  expid + " : " + companyname + " : "+ companysector
+				+ " : "+ jobtitle + " : " + location + " : " + duration;
 	}
 }

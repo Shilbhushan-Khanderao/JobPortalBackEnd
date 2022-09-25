@@ -142,7 +142,7 @@ public class AdminController {
 			return ResponseEntity.ok(hmap);
 		}
 		
-		//http://localhost:9009/admin/viewjobprovider/1
+		//http://localhost:9009/admin/viewprofile/1
 		@GetMapping(value = "/viewprofile/{adminid}")
 		public Admin viewAdmin(@PathVariable("adminid") int adminid){
 			

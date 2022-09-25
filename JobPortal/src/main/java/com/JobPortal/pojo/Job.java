@@ -119,6 +119,14 @@ public class Job {
 	public void setPostStatus(String postStatus) {
 		this.postStatus = postStatus;
 	}
+	
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
+	}
 
 	@Override
 	public String toString() {

@@ -1,5 +1,6 @@
 package com.JobPortal.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +93,7 @@ public class JobSeekerController {
 	}
 	
 	//http://localhost:9009/jobseeker/apply
-	@PostMapping(value = "/apply")
+	@PostMapping(value = "/apply") 
 	public ResponseEntity<?> applyJob(@RequestBody Application appl) {
 		
 		if (daoImpl.applyForJob(appl)) {
@@ -165,6 +166,14 @@ public class JobSeekerController {
 		return ResponseEntity.ok(hmap);
 	}
 	
+	//http://localhost:9009/jobseeker/geteducation/2
+	@GetMapping(value = "/geteducation/{jobseekerid}")
+	public List<Education> getEducation(@PathVariable("jobseekerid") int id) {
+		List<Education> lst = new ArrayList<>();
+		lst = daoImpl.getEducation(id);
+		return lst;
+	}
+	
 	//http://localhost:9009/jobseeker/addexp
 	@PostMapping(value = "/addexp")
 	public ResponseEntity<?> addExperience(@RequestBody Experience experience) {
@@ -201,5 +210,13 @@ public class JobSeekerController {
 			hmap.put("msg", "failed");
 		
 		return ResponseEntity.ok(hmap);
+	}
+	
+	//http://localhost:9009/jobseeker/getexperience/2
+	@GetMapping(value = "/getexperience/{jsid}")
+	public List<Experience> getExperiences(@PathVariable("jsid") int jsid) {
+		
+		List<Experience> lst = daoImpl.getExperiences(jsid);
+		return lst;
 	}
 }

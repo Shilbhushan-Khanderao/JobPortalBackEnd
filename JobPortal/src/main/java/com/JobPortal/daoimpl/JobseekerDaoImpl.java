@@ -148,6 +148,7 @@ public class JobseekerDaoImpl implements JobseekerDao {
 			
 			if(opt.isPresent()) {
 				Jobseeker pr = opt.get();
+				System.out.println(pr);
 				return pr;
 			}
 			else
@@ -220,6 +221,7 @@ public class JobseekerDaoImpl implements JobseekerDao {
 		}
 	}
 
+	
 	@Override
 	public List<Education> getEducationList() {
 		List<Education> lst = new ArrayList<>();
@@ -288,6 +290,34 @@ public class JobseekerDaoImpl implements JobseekerDao {
 		
 		try {
 			expRepository.findAll().forEach(lst::add);
+			return lst;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<Education> getEducation(int jobseekerid) {
+		List<Education> edu = new ArrayList<>();
+		
+		try {
+			edu = eduRepository.getEducation(jobseekerid);
+			return edu;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<Experience> getExperiences(int jobseekerid) {
+		List<Experience> lst = new ArrayList<>();
+		
+		try {
+			lst = expRepository.getExperience(jobseekerid);
 			return lst;
 			
 		} catch (Exception e) {

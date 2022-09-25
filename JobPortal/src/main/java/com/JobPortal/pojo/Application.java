@@ -17,11 +17,11 @@ public class Application {
 	@Column(name = "applicationstatus")
 	private String applicationstatus;
 	
-	@ManyToOne(fetch = FetchType.LAZY,targetEntity = Jobseeker.class,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY,targetEntity = Jobseeker.class,cascade = {CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name = "jobseekerid",referencedColumnName = "jobseekerid")
 	private Jobseeker jobseeker;
 	
-	@ManyToOne(fetch = FetchType.LAZY,targetEntity = Job.class,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY,targetEntity = Job.class,cascade = {CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name = "jobid",referencedColumnName = "jobid")
 	private Job job;
 	
@@ -57,6 +57,22 @@ public class Application {
 	public void setApplicationstatus(String applicationstatus) {
 		this.applicationstatus = applicationstatus;
 	}
+	
+//	public Job getJob() {
+//		return job;
+//	}
+//
+//	public void setJob(Job job) {
+//		this.job = job;
+//	}
+//
+//	public Jobseeker getJobseeker() {
+//		return jobseeker;
+//	}
+//
+//	public void setJobseeker(Jobseeker jobseeker) {
+//		this.jobseeker = jobseeker;
+//	}
 
 	@Override
 	public String toString() {

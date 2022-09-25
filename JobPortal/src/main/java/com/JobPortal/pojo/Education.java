@@ -43,6 +43,10 @@ public class Education{
 	@Column(name = "mastersyear")
 	private String mastersyear;
 	
+	@OneToMany(fetch = FetchType.LAZY,targetEntity = Jobseeker.class,cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+	@JoinColumn(name = "jobseekerid",referencedColumnName = "jobseekerid",unique = true)
+	private Jobseeker jobseeker;
+
 	public Education(){
 		
 	}
@@ -158,5 +162,19 @@ public class Education{
 	public void setMastersyear(String mastersyear) {
 		this.mastersyear = mastersyear;
 	}
-
+	
+//	public Jobseeker getJobseeker() {
+//		return jobseeker;
+//	}
+//
+//	public void setJobseeker(Jobseeker jobseeker) {
+//		this.jobseeker = jobseeker;
+//	}
+	
+	@Override
+	public String toString() {
+		return educationid + " : " + educationtype + " : "+ sscpercent + " : "+ hscpercent +" : "+ diplomapercent + " : "
+				+ degreepercent + " : " + masterspercent + " : " + sscyear + " : " + hscyear
+				+ " : " + diplomayear + " : " + degreeyear + " : " + mastersyear;
+	}
 }
